@@ -158,7 +158,7 @@ namespace BusinessLogic.Controllers
 
         public static void OpretTidsregistrering(DateTime startTid, DateTime slutTid, string cpr, int? sagNr)
         {
-            if (startTid > slutTid) throw new ArgumentException("Tidsregistreringen er invalid.");
+            if (startTid >= slutTid) throw new ArgumentException("Tidsregistreringen er invalid. Tidsregistreringen skal slutte efter den starter - ikke omvendt.");
 
             //if (cpr.Length != 10) throw new ArgumentException("Et cpr-nummer skal være på præcis 10 tal"); Muligvis ikke nødvendig
             if (!Regex.IsMatch(cpr, "\\d{10}")) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
@@ -170,7 +170,7 @@ namespace BusinessLogic.Controllers
 
         public static void OpdaterTidsregistrering(Tidsregistrering tidsregistrering, DateTime nyStartTid, DateTime nySlutTid, int? nySagNr)
         {
-            if (nyStartTid > nySlutTid) throw new ArgumentException("Tidsregistreringen er invalid.");
+            if (nyStartTid >= nySlutTid) throw new ArgumentException("Tidsregistreringen er invalid. Tidsregistreringen skal slutte efter den starter - ikke omvendt.");
 
             tidsregistrering.StartTid = nyStartTid;
             tidsregistrering.SlutTid = nySlutTid;
