@@ -12,7 +12,7 @@ namespace DTO.Model
 
         public string Navn { get; set; }
 
-        public virtual List<Medarbejder> Medarbejdere { get; }
+        public virtual List<Medarbejder> Medarbejdere { get; set; }
 
         private Afdeling()
         {

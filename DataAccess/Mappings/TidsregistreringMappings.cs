@@ -22,7 +22,6 @@ namespace DataAccess.Mappings
         {
             daTidsregistrering.StartTid = dtoTidsregistrering.StartTid;
             daTidsregistrering.SlutTid = dtoTidsregistrering.SlutTid;
-            daTidsregistrering.MedarbejderCPR = dtoTidsregistrering.MedarbejderCPR;
             daTidsregistrering.SagNr = dtoTidsregistrering.SagNr;
         }
     }

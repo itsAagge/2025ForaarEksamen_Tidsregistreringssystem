@@ -18,10 +18,10 @@ namespace DTO.Model
 
 
         //To and from DB (since cpr isn't a self-incrementing int)
-        public Medarbejder(string cpr, string initaler, string navn)
+        public Medarbejder(string cpr, string initialer, string navn)
         {
             CPR = cpr;
-            Initialer = initaler;
+            Initialer = initialer;
             Navn = navn;
             Afdelinger = new List<Afdeling>();
         }
