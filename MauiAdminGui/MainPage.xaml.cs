@@ -1,25 +1,27 @@
-﻿namespace MauiAdminGui
+﻿using System.Threading.Tasks;
+
+namespace MauiAdminGui
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void Afdelinger_Clicked(object sender, EventArgs e)
         {
-            count++;
+            await Navigation.PushAsync(new AfdelingerPage());
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        private async void Medarbejdere_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MedarbejderePage());
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private async void Sager_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SagerPage());
         }
     }
-
 }

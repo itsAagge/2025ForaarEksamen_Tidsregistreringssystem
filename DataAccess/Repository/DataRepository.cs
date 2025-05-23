@@ -13,6 +13,21 @@ namespace DataAccess.Repository
     public static class DataRepository
     {
         //Afdeling
+        public static List<DTO.Model.Afdeling> HentAlleAfdelinger()
+        {
+            using (DataContext context = new DataContext())
+            {
+                List<DataAccess.Model.Afdeling> daAfdelinger = context.Afdelinger.ToList();
+                List<DTO.Model.Afdeling> dtoAfdelinger = new List<DTO.Model.Afdeling>();
+                foreach (DataAccess.Model.Afdeling daAfdeling in daAfdelinger)
+                {
+                    DTO.Model.Afdeling dtoAfdeling = daAfdeling.Map();
+                    dtoAfdelinger.Add(dtoAfdeling);
+                }
+                return dtoAfdelinger;
+            }
+        }
+
         public static List<DTO.Model.Afdeling> HentAlleAfdelingerMedMedarbejdere()
         {
             using (DataContext context = new DataContext())
@@ -39,6 +54,21 @@ namespace DataAccess.Repository
                 DTO.Model.Afdeling dtoAfdeling = daAfdeling.Map();
                 dtoAfdeling.Medarbejdere = HentAlleMedarbejdereFraAfdeling_Internal(daAfdeling, context);
                 return dtoAfdeling;
+            }
+        }
+
+        public static List<DTO.Model.Afdeling> HentAfdelingerSomMedarbejderIkkeErI(string medarbejderCPR)
+        {
+            using (DataContext context = new DataContext())
+            {
+                List<DataAccess.Model.Afdeling> daAfdelinger = context.Afdelinger.Where(a => a.Medarbejdere.All(m => m.CPR != medarbejderCPR)).ToList();
+                List<DTO.Model.Afdeling> dtoAfdelinger = new List<DTO.Model.Afdeling>();
+                foreach (DataAccess.Model.Afdeling daAfdeling in daAfdelinger)
+                {
+                    DTO.Model.Afdeling dtoAfdeling = daAfdeling.Map();
+                    dtoAfdelinger.Add(dtoAfdeling);
+                }
+                return dtoAfdelinger;
             }
         }
 
@@ -78,7 +108,7 @@ namespace DataAccess.Repository
             using (DataContext context = new DataContext())
             {
                 DataAccess.Model.Afdeling? daAfdeling = context.Afdelinger.Include(a => a.Medarbejdere).Where(a => a.Nr == dtoAfdeling.Nr).FirstOrDefault();
-                if (daAfdeling == default) throw new NullReferenceException("Der findes ikke en afdeling med nr: " + dtoAfdeling.Nr + " i databasen");
+                if (daAfdeling == default) throw new NullReferenceException("Der findes ikke en afdeling med nr: " + dtoAfdeling.Nr + " i databasen.");
                 if (!daAfdeling.Medarbejdere.IsNullOrEmpty()) throw new ArgumentException("Du kan ikke slette en afdeling, som har medarbejdere tilknyttet.");
                 context.Afdelinger.Remove(daAfdeling); //Cascading deletes burde slette alle sager
                 context.SaveChanges();
@@ -90,7 +120,7 @@ namespace DataAccess.Repository
             using (DataContext context = new DataContext())
             {
                 DataAccess.Model.Afdeling? daAfdeling = context.Afdelinger.Include(a => a.Medarbejdere).Where(a => a.Nr == dtoAfdeling.Nr).FirstOrDefault();
-                if (daAfdeling == default) throw new NullReferenceException("Der findes ikke en afdeling med nr: " + dtoAfdeling.Nr + " i databasen");
+                if (daAfdeling == default) throw new NullReferenceException("Der findes ikke en afdeling med nr: " + dtoAfdeling.Nr + " i databasen.");
                 DataAccess.Model.Medarbejder? daMedarbejder = context.Medarbejdere.Find(dtoMedarbejder.CPR);
                 if (daMedarbejder == null) throw new NullReferenceException("Der findes ikke en medarbejder med cpr: " + dtoMedarbejder.CPR + " i databasen.");
 
@@ -104,10 +134,10 @@ namespace DataAccess.Repository
             using (DataContext context = new DataContext())
             {
                 DataAccess.Model.Afdeling? daAfdeling = context.Afdelinger.Find(dtoAfdeling.Nr);
-                if (daAfdeling == null) throw new NullReferenceException("Der findes ikke en afdeling med nr: " + dtoAfdeling.Nr + " i databasen");
+                if (daAfdeling == null) throw new NullReferenceException("Der findes ikke en afdeling med nr: " + dtoAfdeling.Nr + " i database.n");
                 DataAccess.Model.Medarbejder? daMedarbejder = context.Medarbejdere.Include(m => m.Afdelinger).Where(m => m.CPR == dtoMedarbejder.CPR).FirstOrDefault();
                 if (daMedarbejder == default) throw new NullReferenceException("Der findes ikke en medarbejder med cpr: " + dtoMedarbejder.CPR + " i databasen.");
-                if (daMedarbejder.Afdelinger.Count() <= 1) throw new ArgumentException("Medarbejderen kunne ikke fjernes. En medarbejder skal altid være tilknyttet mindst 1 afdeling");
+                if (daMedarbejder.Afdelinger.Count() <= 1) throw new ArgumentException("Medarbejderen kunne ikke fjernes. En medarbejder skal altid være tilknyttet mindst 1 afdeling.");
 
                 daMedarbejder.Afdelinger.Remove(daAfdeling);
                 context.SaveChanges();
@@ -187,6 +217,20 @@ namespace DataAccess.Repository
         }
 
         //Sag
+        public static List<DTO.Model.Sag> HentAlleSager()
+        {
+            using (DataContext context = new DataContext())
+            {
+                List<DataAccess.Model.Sag> daSager = context.Sager.ToList();
+                List<DTO.Model.Sag> dtoSager = new List<DTO.Model.Sag>();
+                foreach (DataAccess.Model.Sag daSag in daSager)
+                {
+                    dtoSager.Add(daSag.Map());
+                }
+                return dtoSager;
+            }
+        }
+
         public static List<DTO.Model.Sag> HentAlleSagerFraAfdelingNr(int afdelingNr)
         {
             using (DataContext context = new DataContext())

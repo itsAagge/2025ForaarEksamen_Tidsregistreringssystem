@@ -67,4 +67,16 @@
 	  <ProjectReference Include="..\DTO\DTO.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="AfdelingerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MedarbejderePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SagerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

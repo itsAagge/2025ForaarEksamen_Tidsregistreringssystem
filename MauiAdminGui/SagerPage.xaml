@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAdminGui.SagerPage">
+
+    <ScrollView>
+        <Grid RowDefinitions="*, 5*"
+              BackgroundColor="White">
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="*,*,*">
+                <Button x:Name="btnAfdelinger"
+                        Text="Afdelinger"
+                        Grid.Column="0"
+                        Style="{StaticResource MenuKnap}"
+                        Clicked="Afdelinger_Clicked" />
+                <Button x:Name="btnMedarbejdere"
+                        Text="Medarbejdere"
+                        Grid.Column="1"
+                        Style="{StaticResource MenuKnap}"
+                        Clicked="Medarbejdere_Clicked" />
+                <Button x:Name="btnSager"
+                        Text="Sager"
+                        Grid.Column="2"
+                        Style="{StaticResource MenuKnap}"
+                        Clicked="Sager_Clicked"
+                        BackgroundColor="LightGrey" />
+            </Grid>
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*"
+                  RowDefinitions="*">
+                <VerticalStackLayout Grid.Column="0"
+                                     Margin="20"
+                                     HorizontalOptions="End">
+                    <Label TextColor="Black"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,10"
+                           HorizontalOptions="Center">
+                        Afdelinger
+                    </Label>
+                    <Frame BorderColor="Black"
+                           BackgroundColor="White"
+                           HeightRequest="600"
+                           WidthRequest="500">
+                        <CollectionView x:Name="SagerView"
+                                        SelectionMode="Single"
+                                        SelectionChanged="SagerView_SelectionChanged">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Margin="10"
+                                           Padding="10"
+                                           BorderColor="Gray"
+                                           BackgroundColor="#f0f0f0"
+                                           CornerRadius="10">
+                                        <Label Text="{Binding}"
+                                               FontSize="28"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start" />
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal"></VisualState>
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="LightSkyBlue"></Setter>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Frame>
+                    <HorizontalStackLayout HorizontalOptions="Center"
+                                           Margin="5">
+                        <VerticalStackLayout Margin="0,0,20,0">
+                            <Label TextColor="Black"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center">
+                                Denne sag tilhører afdelingen
+                            </Label>
+                            <Label x:Name="sagAfdeling"
+                                   TextColor="Black"
+                                   FontSize="20"
+                                   HorizontalOptions="Center">
+                                Ingen sag valgt
+                            </Label>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1"
+                                     Margin="20"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Start">
+                    <Border Margin="0,0,0,20">
+                        <Entry x:Name="entrySagOverskrift"
+                               Placeholder="Ny sag overskrift"
+                               TextColor="Black"
+                               MaximumWidthRequest="300"></Entry>
+                    </Border>
+                    <Border Margin="0,0,0,20">
+                        <Editor x:Name="entrySagBeskrivelse"
+                                Placeholder="Ny sag beskrivelse"
+                                TextColor="Black"
+                                HeightRequest="150"
+                                WidthRequest="300"></Editor>
+                    </Border>
+                    <Border Margin="0,0,0,20">
+                        <Picker x:Name="pickerAfdelinger"
+                                TextColor="#030202"
+                                ItemDisplayBinding="{Binding}"></Picker>
+                    </Border>
+                    <Button x:Name="tilføjSagKnap"
+                            Text="Tilføj ny sag"
+                            BackgroundColor="LightSkyBlue"
+                            Clicked="tilføjSagKnap_Clicked"
+                            Margin="0,0,0,20"></Button>
+                    <Button x:Name="redigerSagKnap"
+                            Text="Rediger sag"
+                            BackgroundColor="LightSkyBlue"
+                            Clicked="redigerSagKnap_Clicked"
+                            Margin="0,0,0,20"
+                            IsEnabled="False"></Button>
+                    <Button x:Name="sletSagKnap"
+                            Text="Slet sag"
+                            BackgroundColor="LightSkyBlue"
+                            Clicked="sletSagKnap_Clicked"
+                            IsEnabled="False"></Button>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

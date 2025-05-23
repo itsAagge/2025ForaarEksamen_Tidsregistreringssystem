@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAdminGui.AfdelingerPage">
+    
+    <ScrollView>
+        <Grid RowDefinitions="*, 5*"
+              BackgroundColor="White">
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="*,*,*">
+                <Button x:Name="btnAfdelinger"
+                        Text="Afdelinger"
+                        Grid.Column="0"
+                        Style="{StaticResource MenuKnap}"
+                        Clicked="Afdelinger_Clicked"
+                        BackgroundColor="LightGrey" />
+                <Button x:Name="btnMedarbejdere"
+                        Text="Medarbejdere"
+                        Grid.Column="1"
+                        Style="{StaticResource MenuKnap}"
+                        Clicked="Medarbejdere_Clicked" />
+                <Button x:Name="btnSager"
+                        Text="Sager"
+                        Grid.Column="2"
+                        Style="{StaticResource MenuKnap}"
+                        Clicked="Sager_Clicked" />
+            </Grid>
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*"
+                  RowDefinitions="*">
+                <VerticalStackLayout Grid.Column="0"
+                                     Margin="20"
+                                     HorizontalOptions="End">
+                    <Label TextColor="Black"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,10"
+                           HorizontalOptions="Center">
+                        Afdelinger
+                    </Label>
+                    <Frame BorderColor="Black"
+                           BackgroundColor="White"
+                           HeightRequest="600"
+                           WidthRequest="500">
+                        <CollectionView x:Name="AfdelingView"
+                                        SelectionMode="Single"
+                                        SelectionChanged="AfdelingView_SelectionChanged">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Margin="10"
+                                           Padding="10"
+                                           BorderColor="Gray"
+                                           BackgroundColor="#f0f0f0"
+                                           CornerRadius="10">
+                                        <Label Text="{Binding}"
+                                               FontSize="28"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start" />
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal"></VisualState>
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="LightSkyBlue"></Setter>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Frame>
+                    <HorizontalStackLayout HorizontalOptions="Center"
+                                           Margin="5">
+                        <VerticalStackLayout Margin="0,0,20,0">
+                            <Label TextColor="Black"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center">
+                                Medarbejdere i afdeling
+                            </Label>
+                            <Label x:Name="afdelingMedarbejdere"
+                                   TextColor="Black"
+                                   FontSize="20"
+                                   HorizontalOptions="Center">
+                                Ingen afdeling valgt
+                            </Label>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label TextColor="Black"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center">
+                                Sager i afdeling
+                            </Label>
+                            <Label x:Name="afdelingSager"
+                                   TextColor="Black"
+                                   FontSize="20"
+                                   HorizontalOptions="Center">
+                                Ingen afdeling valgt
+                            </Label>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1"
+                                     Margin="20"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Start">
+                    <HorizontalStackLayout Margin="0,0,0,80">
+                        <Border Margin="0,0,20,0"
+                                WidthRequest="200">
+                            <Entry x:Name="entryTilføjAfdeling"
+                                   Placeholder="Navn på ny afdeling"
+                                   TextColor="Black"></Entry>
+                        </Border>
+                        <Button x:Name="tilføjAfdelingKnap"
+                                Text="Tilføj afdeling"
+                                BackgroundColor="LightSkyBlue"
+                                Clicked="tilføjAfdelingKnap_Clicked"></Button>
+                    </HorizontalStackLayout>
+                    <Border Margin="0,0,0,20">
+                        <Entry x:Name="entryRedigerAfdeling"
+                               Placeholder="Ingen afdeling valgt"
+                               IsReadOnly="True"
+                               TextColor="Black"></Entry>
+                    </Border>
+                    <HorizontalStackLayout Margin="0,0,0,20">
+                        <Button x:Name="redigerAfdelingKnap"
+                                Text="Rediger navn"
+                                BackgroundColor="LightSkyBlue"
+                                Clicked="redigerAfdelingKnap_Clicked"
+                                Margin="0,0,20,0"
+                                IsEnabled="False"></Button>
+                        <Button x:Name="sletAfdelingKnap"
+                                Text="Slet afdeling"
+                                BackgroundColor="LightSkyBlue"
+                                Clicked="sletAfdelingKnap_Clicked"
+                                IsEnabled="False"></Button>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

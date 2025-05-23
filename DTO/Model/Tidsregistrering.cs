@@ -36,5 +36,10 @@ namespace DTO.Model
             MedarbejderCPR = medarbejderCPR;
             SagNr = sagNr;
         }
+
+        public override string ToString()
+        {
+            return "Tidsregistrering " + Nr + ". " + StartTid.ToString() + ". Medarbejder: " + MedarbejderCPR;
+        }
     }
 }

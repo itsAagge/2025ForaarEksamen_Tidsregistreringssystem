@@ -25,5 +25,10 @@ namespace DTO.Model
             Navn = navn;
             Afdelinger = new List<Afdeling>();
         }
+
+        public override string ToString()
+        {
+            return Navn + " (" + Initialer + ")";
+        }
     }
 }

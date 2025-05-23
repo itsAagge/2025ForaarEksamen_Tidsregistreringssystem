@@ -31,5 +31,10 @@ namespace DTO.Model
         {
             Navn = navn;
         }
+
+        public override string ToString()
+        {
+            return Navn;
+        }
     }
 }

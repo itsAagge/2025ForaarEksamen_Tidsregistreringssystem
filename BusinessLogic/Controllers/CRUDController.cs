@@ -12,6 +12,11 @@ namespace BusinessLogic.Controllers
     public static class CRUDController
     {
         //Afdeling
+        public static List<Afdeling> HentAlleAfdelinger()
+        {
+            return DataRepository.HentAlleAfdelinger();
+        }
+
         public static List<Afdeling> HentAlleAfdelingerMedMedarbejdere()
         {
             return DataRepository.HentAlleAfdelingerMedMedarbejdere();
@@ -20,6 +25,11 @@ namespace BusinessLogic.Controllers
         public static Afdeling HentAfdelingMedMedarbejdere(int afdelingNr)
         {
             return DataRepository.HentAfdelingMedMedarbejdere(afdelingNr);
+        }
+
+        public static List<Afdeling> HentAfdelingerSomMedarbejderIkkeErI(string cpr)
+        {
+            return DataRepository.HentAfdelingerSomMedarbejderIkkeErI(cpr);
         }
 
         public static void OpretAfdeling(string navn)
@@ -115,6 +125,11 @@ namespace BusinessLogic.Controllers
         }
 
         //Sag
+        public static List<Sag> HentAlleSager()
+        {
+            return DataRepository.HentAlleSager();
+        }
+
         public static List<Sag> HentAlleSagerFraAfdelingNr(int afdelingNr)
         {
             return DataRepository.HentAlleSagerFraAfdelingNr(afdelingNr);

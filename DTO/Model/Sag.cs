@@ -32,5 +32,10 @@ namespace DTO.Model
             Beskrivelse = beskrivelse;
             AfdelingNr= afdelingNr;
         }
+
+        public override string ToString()
+        {
+            return Nr + ". " + Overskrift;
+        }
     }
 }
