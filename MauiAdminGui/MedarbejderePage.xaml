@@ -262,7 +262,7 @@
                             Margin="0,0,0,20"
                             IsEnabled="False"></Button>
                     <Button x:Name="sletMedarbjederKnap"
-                            Text="Slet afdeling"
+                            Text="Slet valgt medarbejder"
                             BackgroundColor="LightSkyBlue"
                             Clicked="sletMedarbjederKnap_Clicked"
                             IsEnabled="False"></Button>

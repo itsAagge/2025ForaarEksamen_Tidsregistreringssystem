@@ -188,6 +188,10 @@ namespace DataAccess.Repository
         {
             using (DataContext context = new DataContext())
             {
+                DataAccess.Model.Medarbejder cprMedarbejder = context.Medarbejdere.Where(m => m.CPR == dtoMedarbejder.CPR).FirstOrDefault();
+                if (cprMedarbejder != default) throw new ArgumentException("Der findes allerede en medarbejder i systemet med det cpr-nummer.");
+                DataAccess.Model.Medarbejder initialMedarbejder = context.Medarbejdere.Where(m => m.Initialer == dtoMedarbejder.Initialer).FirstOrDefault();
+                if (initialMedarbejder != default) throw new ArgumentException("Der findes allerede en medarbejder i systemet med disse initialer.");
                 DataAccess.Model.Medarbejder daMedarbejder = dtoMedarbejder.Map();
                 context.Medarbejdere.Add(daMedarbejder);
                 context.SaveChanges();

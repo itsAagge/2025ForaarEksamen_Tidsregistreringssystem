@@ -141,6 +141,8 @@ public partial class MedarbejderePage : ContentPage
         {
             VisPopUpAdvarsel(ex.Message);
         }
+
+        ResetAll();
     }
 
     private void AfdelingView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -176,6 +178,7 @@ public partial class MedarbejderePage : ContentPage
         {
             VisPopUpAdvarsel(ex.Message);
         }
+
         ResetAll();
     }
 
@@ -190,6 +193,7 @@ public partial class MedarbejderePage : ContentPage
         {
             VisPopUpAdvarsel(ex.Message);
         }
+
         ResetAll();
     }
 

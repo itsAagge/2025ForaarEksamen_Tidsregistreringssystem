@@ -9,7 +9,7 @@ public partial class AfdelingerPage : ContentPage
 	public AfdelingerPage()
 	{
 		InitializeComponent();
-        OpdaterAfdelingView();
+        ResetAll();
 	}
 
     private async void Afdelinger_Clicked(object sender, EventArgs e)
@@ -27,10 +27,11 @@ public partial class AfdelingerPage : ContentPage
         await Navigation.PushAsync(new SagerPage());
     }
 
-    private void OpdaterAfdelingView()
+    private void ResetAll()
     {
         AfdelingView.ItemsSource = CRUDController.HentAlleAfdelingerMedMedarbejdere();
         entryRedigerAfdeling.IsReadOnly = true;
+        entryTilføjAfdeling.Text = "";
     }
 
     private async void VisPopUpAdvarsel(string besked)
@@ -62,7 +63,7 @@ public partial class AfdelingerPage : ContentPage
             VisPopUpAdvarsel(ex.Message);
         }
 
-        OpdaterAfdelingView();
+        ResetAll();
     }
 
     private void redigerAfdelingKnap_Clicked(object sender, EventArgs e)
@@ -84,7 +85,7 @@ public partial class AfdelingerPage : ContentPage
         entryRedigerAfdeling.Text = "";
         entryRedigerAfdeling.IsReadOnly = true;
 
-        OpdaterAfdelingView();
+        ResetAll();
     }
 
     private void sletAfdelingKnap_Clicked(object sender, EventArgs e)
@@ -105,6 +106,6 @@ public partial class AfdelingerPage : ContentPage
         entryRedigerAfdeling.Text = "";
         entryRedigerAfdeling.IsReadOnly = true;
 
-        OpdaterAfdelingView();
+        ResetAll();
     }
 }
