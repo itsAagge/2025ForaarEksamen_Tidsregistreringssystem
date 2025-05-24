@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Tidsregistreringer";
+}
+@model TidsregModel
+
+<div>
+    <p>Velkommen @Model.LoggedInNavn</p>
+    <h3>Opret tidsregistrering</h3>
+    <br />
+    <br />
+    <div>Dine afdelinger</div>
+    @using (Html.BeginForm("HentSager", "Home", FormMethod.Post))
+    {
+        @Html.DropDownListFor(m => m.ValgtAfdelingNr, Model.Afdelinger, "Opret uden afdeling", new { @class = "form-control" })
+        <input type="submit" value="Videre" />
+    }
+    <br />
+    @if (@Model.Sager != null)
+    {
+        @using (Html.BeginForm("OpretTidsregistrering", "Home", FormMethod.Post))
+        {
+            <span>Afdelingens sager </span>
+            @Html.DropDownListFor(m => m.ValgtSagNr, Model.Sager, "Ingen sag valgt", new { @class = "form-control" })
+
+            <span>Vælg et starttidspunkt </span>
+            @Html.TextBoxFor(m => m.StartTid, new { type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
+            <br />
+
+            <span>Vælg et sluttidspunkt </span>
+            @Html.TextBoxFor(m => m.SlutTid, new { type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
+            <br />
+
+            <input type="submit" value="Opret tidsregistrering"/>
+        }
+    }
+</div>

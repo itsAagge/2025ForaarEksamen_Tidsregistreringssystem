@@ -72,7 +72,6 @@ namespace BusinessLogic.Controllers
         public static Medarbejder HentMedarbejderMedAfdelinger(string cpr)
         {
             if (!Regex.IsMatch(cpr, "\\d{10}")) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
-            if (!Modulus11Check(cpr)) throw new ArgumentException("Det indtastede cpr-nummer er ikke gyldigt.");
 
             return DataRepository.HentMedarbejderMedAfdelinger(cpr);
         }
@@ -82,7 +81,7 @@ namespace BusinessLogic.Controllers
             if (!Regex.IsMatch(cpr, "\\d{10}")) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
             if (!Modulus11Check(cpr)) throw new ArgumentException("Det indtastede cpr-nummer er ikke gyldigt.");
 
-            if (initialer.Length <= 0 || initialer.Length > 5) throw new ArgumentException("Initialerne skal være mellem 1 og 5 bogstaver lange."); //Kommer der en sql-fejl, hvis de ikke er unikke? TODO
+            if (initialer.Length <= 0 || initialer.Length > 5) throw new ArgumentException("Initialerne skal være mellem 1 og 5 bogstaver lange.");
             if (navn.Length <= 0 || navn.Length > 100) throw new ArgumentException("Systemet kan kun håndtere navne på mellem 1 og 100 tegn.");
 
             Medarbejder medarbejder = new Medarbejder(cpr, initialer, navn);
@@ -109,7 +108,7 @@ namespace BusinessLogic.Controllers
 
         public static void OpdaterMedarbejder(Medarbejder medarbejder, string nyeInitialer, string nytNavn)
         {
-            if (nyeInitialer.Length <= 0 || nyeInitialer.Length > 5) throw new ArgumentException("Initialerne skal være mellem 1 og 5 bogstaver lange."); //Kommer der en sql-fejl, hvis de ikke er unikke? TODO
+            if (nyeInitialer.Length <= 0 || nyeInitialer.Length > 5) throw new ArgumentException("Initialerne skal være mellem 1 og 5 bogstaver lange.");
             if (nytNavn.Length <= 0 || nytNavn.Length > 100) throw new ArgumentException("Systemet kan kun håndtere navne på mellem 1 og 100 tegn.");
 
             medarbejder.Initialer = nyeInitialer;
@@ -123,6 +122,11 @@ namespace BusinessLogic.Controllers
         }
 
         //Sag
+
+        public static Sag HentSag(int sagNr)
+        {
+            return DataRepository.HentSag(sagNr);
+        }
         public static List<Sag> HentAlleSager()
         {
             return DataRepository.HentAlleSager();
@@ -172,10 +176,7 @@ namespace BusinessLogic.Controllers
         public static void OpretTidsregistrering(DateTime startTid, DateTime slutTid, string cpr, int? sagNr)
         {
             if (startTid >= slutTid) throw new ArgumentException("Tidsregistreringen er invalid. Tidsregistreringen skal slutte efter den starter - ikke omvendt.");
-
-            //if (cpr.Length != 10) throw new ArgumentException("Et cpr-nummer skal være på præcis 10 tal"); Muligvis ikke nødvendig
             if (!Regex.IsMatch(cpr, "\\d{10}")) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
-            if (!Modulus11Check(cpr)) throw new ArgumentException("Det indtastede cpr-nummer er ikke gyldigt.");
 
             Tidsregistrering tidsregistrering = new Tidsregistrering(startTid, slutTid, cpr, sagNr);
             DataRepository.OpretTidsregistrering(tidsregistrering);

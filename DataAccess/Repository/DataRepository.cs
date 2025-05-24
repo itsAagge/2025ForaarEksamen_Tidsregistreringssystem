@@ -221,6 +221,16 @@ namespace DataAccess.Repository
         }
 
         //Sag
+        public static DTO.Model.Sag HentSag(int sagNr)
+        {
+            using (DataContext context = new DataContext())
+            {
+                DataAccess.Model.Sag? daSag = context.Sager.Find(sagNr);
+                if (daSag == null) throw new NullReferenceException("Der findes ikke en sag med nr: " + sagNr + " i databasen.");
+                return daSag.Map();
+            }
+        }
+
         public static List<DTO.Model.Sag> HentAlleSager()
         {
             using (DataContext context = new DataContext())

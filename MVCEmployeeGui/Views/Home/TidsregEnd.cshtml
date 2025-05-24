@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = (Model.ErrorMessage != null) ? "Fejl" : "Succes";
+}
+@model TidsregEnd
+
+<div class="text-center">
+    @if (@Model.ErrorMessage != null)
+    {
+        <h1 class="display-4">Fejl</h1>
+        <p>@Model.ErrorMessage</p>
+    }
+    else
+    {
+        <h1 class="display-4">Success</h1>
+        <p>@Model.SuccessMessage</p>
+    }
+</div>

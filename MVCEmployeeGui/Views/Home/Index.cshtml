@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Log ind";
 }
+@model LoginModel
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Velkommen</h1>
+    <p>Venligst indtast dit cpr-nummer</p>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post)) {
+        @Html.Password("cpr")
+        <input type="submit" value="Log ind" />
+    }
+    <br />
+    <br />
+    <br />
+
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger">
+            @Model.ErrorMessage
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(Model.LoggedInName))
+    {
+        <div>
+            Du er logget ind som: @Model.LoggedInName
+        </div>
+    }
 </div>
