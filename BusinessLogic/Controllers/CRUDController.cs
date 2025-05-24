@@ -71,6 +71,7 @@ namespace BusinessLogic.Controllers
 
         public static Medarbejder HentMedarbejderMedAfdelinger(string cpr)
         {
+            if (cpr.Length != 10) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
             if (!Regex.IsMatch(cpr, "\\d{10}")) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
 
             return DataRepository.HentMedarbejderMedAfdelinger(cpr);
@@ -78,6 +79,7 @@ namespace BusinessLogic.Controllers
 
         public static void OpretMedarbejder(Afdeling afdeling, string cpr, string initialer, string navn)
         {
+            if (cpr.Length != 10) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
             if (!Regex.IsMatch(cpr, "\\d{10}")) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
             if (!Modulus11Check(cpr)) throw new ArgumentException("Det indtastede cpr-nummer er ikke gyldigt.");
 
@@ -176,6 +178,7 @@ namespace BusinessLogic.Controllers
         public static void OpretTidsregistrering(DateTime startTid, DateTime slutTid, string cpr, int? sagNr)
         {
             if (startTid >= slutTid) throw new ArgumentException("Tidsregistreringen er invalid. Tidsregistreringen skal slutte efter den starter - ikke omvendt.");
+            if (cpr.Length != 10) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
             if (!Regex.IsMatch(cpr, "\\d{10}")) throw new ArgumentException("Et cpr-nummer må kun bestå af 10 tal.");
 
             Tidsregistrering tidsregistrering = new Tidsregistrering(startTid, slutTid, cpr, sagNr);

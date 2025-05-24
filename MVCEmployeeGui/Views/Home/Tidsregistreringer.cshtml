@@ -23,11 +23,11 @@
             @Html.DropDownListFor(m => m.ValgtSagNr, Model.Sager, "Ingen sag valgt", new { @class = "form-control" })
 
             <span>Vælg et starttidspunkt </span>
-            @Html.TextBoxFor(m => m.StartTid, new { type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
+            @Html.TextBoxFor(m => m.StartTid, new { type = "datetime-local" })
             <br />
 
             <span>Vælg et sluttidspunkt </span>
-            @Html.TextBoxFor(m => m.SlutTid, new { type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm") })
+            @Html.TextBoxFor(m => m.SlutTid, new { type = "datetime-local" })
             <br />
 
             <input type="submit" value="Opret tidsregistrering"/>

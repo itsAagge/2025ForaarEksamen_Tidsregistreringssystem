@@ -103,7 +103,9 @@ namespace MVCEmployeeGui.Controllers
 
             TidsregModel tidsregModel = new TidsregModel() { LoggedInNavn = loggedInNavn,
                                                              Afdelinger = afdelingerSelect,
-                                                             Sager = sagerSelect };
+                                                             Sager = sagerSelect,
+                                                             StartTid = DateTime.Now.ToString("yyyy-MM-ddTHH:mm"),
+                                                             SlutTid = DateTime.Now.AddHours(1).ToString("yyyy-MM-ddTHH:mm")};
             return View("Tidsregistreringer", tidsregModel);
         }
 
